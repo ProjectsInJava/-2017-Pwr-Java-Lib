@@ -4,16 +4,28 @@ import java.util.ArrayList;
 
 public class QueueCycle<E> implements MyQueue<E>{
     private ArrayList<E> memory_;
+    private int size_;
+    private int counter_;
 
-    public QueueCycle(int size, ArrayList<E> memory_)
+    public QueueCycle(int size)
     {
+        counter_ = 0;
+        size_ = size;
+        memory_ = new ArrayList<>(size);
+    }
 
-        this.memory_ = memory_;
+    private int getIdxForNewElem() throws FullException
+    {
+        return 0;
     }
 
     @Override
-    public void enqueue(E x) throws FullException {
-
+    public void enqueue(E newElem) throws FullException {
+        if(size_ < 1){
+            throw new FullException("Size of queue is lower than 1");
+        }
+        int newIdx = counter_++%(size_-1);
+        memory_.add(newIdx, newElem);
     }
 
     @Override
@@ -28,11 +40,16 @@ public class QueueCycle<E> implements MyQueue<E>{
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return memory_.isEmpty();
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        return size_ == memory_.size();
+    }
+
+    public ArrayList<E> toArrayList()
+    {
+        return memory_;
     }
 }
