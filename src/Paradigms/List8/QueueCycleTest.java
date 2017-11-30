@@ -29,7 +29,7 @@ class QueueCycleTest {
     }
 
     @Test
-    public void shouldInsertOneElemSize0Queue(){
+    public void shouldInsertOneElemToSize0Queue(){
         int size = 0;
         boolean isExceptionHandled = false;
         MyQueue<String> emptyQueue = new QueueCycle<>(size);
@@ -45,6 +45,28 @@ class QueueCycleTest {
 
         if(!isExceptionHandled){
             assertFalse(true);
+        }
+    }
+
+    @Test
+    public void shouldInsertOneElemToSize1Queue(){
+        int size = 1;
+        boolean isExceptionHandled = false;
+        MyQueue<String> queue = new QueueCycle<>(size);
+        ArrayList<String> expectedQueue = new ArrayList<>(size);
+        expectedQueue.add("123");
+
+        try {
+            queue.enqueue("123");
+        }catch(FullException e){
+            System.out.println(e.getMessage());
+            assertTrue(false);
+            isExceptionHandled = true;
+        }
+
+        if(!isExceptionHandled){
+            assertTrue(queue.isFull());
+            assertEquals(expectedQueue, queue.toArrayList());
         }
     }
 }

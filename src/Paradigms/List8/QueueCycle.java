@@ -21,11 +21,14 @@ public class QueueCycle<E> implements MyQueue<E>{
 
     @Override
     public void enqueue(E newElem) throws FullException {
+        int newIdx = -1;
         if(size_ < 1){
             throw new FullException("Size of queue is lower than 1");
         }
-        int newIdx = counter_++%(size_-1);
-        memory_.add(newIdx, newElem);
+        else{
+            newIdx = counter_++%size_;
+            memory_.add(newIdx, newElem);
+        }
     }
 
     @Override
