@@ -2,7 +2,9 @@ package Paradigms.List8;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,12 +14,25 @@ class QueueCycleTest {
     public void shouldSize0QueueBeEmpty() {
         int size = 0;
         MyQueue<String> emptyQueue = new QueueCycle<>(size);
+        ArrayList<String> expectedQueue = new ArrayList<>(size);
 
         assertTrue(emptyQueue.isEmpty());
         assertTrue(emptyQueue.isFull());
-        assertEquals(new ArrayList<String>(), emptyQueue.toArrayList());
+        assertEquals(expectedQueue, emptyQueue.toArrayList());
     }
 
+    @Test
+    public void shouldSize1QueueBeEmpty() {
+        int size = 1;
+        MyQueue<String> emptyQueue = new QueueCycle<>(size);
+        ArrayList<String> expectedQueue = new ArrayList<>(size);
+        expectedQueue.add(null);
+
+        assertTrue(emptyQueue.isEmpty());
+        assertFalse(emptyQueue.isFull());
+        assertEquals(expectedQueue, emptyQueue.toArrayList());
+    }
+    /*
     @Test
     public void shouldSize3QueueBeEmpty() {
         int size = 3;
@@ -211,4 +226,5 @@ class QueueCycleTest {
 
         assertTrue(false);
     }
+    */
 }
