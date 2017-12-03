@@ -9,5 +9,4 @@ public interface MyQueue<E>
     public E first( ) throws EmptyException;
     public boolean isEmpty( );
     public boolean isFull( );
-    public ArrayList<E> toArrayList();
 }

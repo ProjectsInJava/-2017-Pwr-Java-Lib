@@ -5,11 +5,14 @@ import java.util.List;
 
 public class QueueCycle<E> implements MyQueue<E>{
     private List<E> memory_;
-    private int readIdx = 0;
-    private int writeIdx = 0;
-    private int elemCounter = 0;
+    private int readIdx;
+    private int writeIdx;
+    private int elemCounter;
 
     public QueueCycle(int size) {
+        elemCounter = 0;
+        readIdx = 0;
+        writeIdx = 0;
         memory_ = new ArrayList<>(size);
         for (int i = 0; i<size; i++){
             memory_.add(null);
@@ -31,8 +34,11 @@ public class QueueCycle<E> implements MyQueue<E>{
     @Override
     public void dequeue() {
         if (!isEmpty()) {
-            readIdx=(readIdx+1)%memory_.size();
+            readIdx = (readIdx + 1) % memory_.size();
             elemCounter--;
+        }
+        else{
+            System.out.println("log: QueueCycle is empty");
         }
     }
 
@@ -48,23 +54,11 @@ public class QueueCycle<E> implements MyQueue<E>{
 
     @Override
     public boolean isEmpty() {
-        return readIdx == writeIdx && (elemCounter==0);
+        return elemCounter<=0;
     }
 
     @Override
     public boolean isFull() {
-        return writeIdx >= memory_.size();
-        /*
-        if (memory_.size() == 0){
-            return true;
-        }
-        else{
-            return f == writeIdx;
-        }
-        */
-    }
-
-    public ArrayList<E> toArrayList() {
-        return (ArrayList<E>) memory_;
+        return elemCounter >= memory_.size();
     }
 }
