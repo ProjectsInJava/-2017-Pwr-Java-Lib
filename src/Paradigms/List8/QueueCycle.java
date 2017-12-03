@@ -16,8 +16,14 @@ public class QueueCycle<E> implements MyQueue<E>{
     }
 
     @Override
-    public void enqueue(E x) throws FullException {
-
+    public void enqueue(E newElem) throws FullException {
+        if (isFull()){
+            throw new FullException("QueueCycle is full");
+        }
+        else{
+            memory_.set(writeIdx, newElem);
+            writeIdx = (writeIdx+1)%memory_.size();
+        }
     }
 
     @Override

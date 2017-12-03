@@ -13,52 +13,41 @@ class QueueCycleTest {
     @Test
     public void shouldSize0QueueBeEmpty() {
         int size = 0;
-        MyQueue<String> emptyQueue = new QueueCycle<>(size);
+        MyQueue<String> queue = new QueueCycle<>(size);
         ArrayList<String> expectedQueue = new ArrayList<>(size);
 
-        assertTrue(emptyQueue.isEmpty());
-        assertTrue(emptyQueue.isFull());
-        assertEquals(expectedQueue, emptyQueue.toArrayList());
+        assertTrue(queue.isEmpty());
+        assertTrue(queue.isFull());
+        assertEquals(expectedQueue, queue.toArrayList());
     }
 
     @Test
     public void shouldSize1QueueBeEmpty() {
         int size = 1;
-        MyQueue<String> emptyQueue = new QueueCycle<>(size);
+        MyQueue<String> queue = new QueueCycle<>(size);
         ArrayList<String> expectedQueue = new ArrayList<>(size);
         expectedQueue.add(null);
 
-        assertTrue(emptyQueue.isEmpty());
-        assertFalse(emptyQueue.isFull());
-        assertEquals(expectedQueue, emptyQueue.toArrayList());
-    }
-    /*
-    @Test
-    public void shouldSize3QueueBeEmpty() {
-        int size = 3;
-        MyQueue<String> emptyQueue = new QueueCycle<>(size);
-        ArrayList<String> expectedQueue = new ArrayList(size);
-        expectedQueue.add(null);
-        expectedQueue.add(null);
-        expectedQueue.add(null);
-
-        assertTrue(emptyQueue.isEmpty());
-        assertFalse(emptyQueue.isFull());
-//        assertEquals(new ArrayList<String>(), emptyQueue.toArrayList());
+        assertTrue(queue.isEmpty());
+        assertFalse(queue.isFull());
+        assertEquals(expectedQueue, queue.toArrayList());
     }
 
     @Test
     public void shouldInsertOneElemToSize0Queue(){
         int size = 0;
         boolean isExceptionHandled = false;
-        MyQueue<String> emptyQueue = new QueueCycle<>(size);
+        MyQueue<String> queue = new QueueCycle<>(size);
         ArrayList<String> expectedQueue = new ArrayList(size);
 
         try {
-            emptyQueue.enqueue("123");
+            queue.enqueue("123");
         }catch(FullException e){
             System.out.println(e.getMessage());
-            assertTrue(true);
+            e.printStackTrace();
+            assertTrue(queue.isEmpty());
+            assertTrue(queue.isFull());
+            assertEquals(expectedQueue, queue.toArrayList());
             isExceptionHandled = true;
         }
 
@@ -67,6 +56,7 @@ class QueueCycleTest {
         }
     }
 
+    /*
     @Test
     public void shouldInsertOneElemToSize1Queue(){
         int size = 1;
