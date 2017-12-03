@@ -14,11 +14,9 @@ class QueueCycleTest {
     public void shouldSize0QueueBeEmpty() {
         int size = 0;
         MyQueue<String> queue = new QueueCycle<>(size);
-        ArrayList<String> expectedQueue = new ArrayList<>(size);
 
         assertTrue(queue.isEmpty());
         assertTrue(queue.isFull());
-        assertEquals(expectedQueue, queue.toArrayList());
     }
 
     @Test
@@ -30,7 +28,6 @@ class QueueCycleTest {
 
         assertTrue(queue.isEmpty());
         assertFalse(queue.isFull());
-        assertEquals(expectedQueue, queue.toArrayList());
     }
 
     @Test
@@ -56,14 +53,12 @@ class QueueCycleTest {
         }
     }
 
-    /*
     @Test
-    public void shouldInsertOneElemToSize1Queue(){
+    public void shouldInsertOneElemToSize1Queue() throws EmptyException {
         int size = 1;
         boolean isExceptionHandled = false;
         MyQueue<String> queue = new QueueCycle<>(size);
-        ArrayList<String> expectedQueue = new ArrayList<>(size);
-        expectedQueue.add("1");
+        String expectedFirst = "1";
 
         try {
             queue.enqueue("1");
@@ -74,11 +69,14 @@ class QueueCycleTest {
         }
 
         if(!isExceptionHandled){
-            assertTrue(queue.isFull());
-            assertEquals(expectedQueue, queue.toArrayList());
+            assertFalse(queue.isEmpty());
+            //assertTrue(queue.isFull());
+            String firstVal = queue.first();
+            assertEquals(expectedFirst, firstVal);
         }
     }
 
+    /*
     @Test
     public void shouldInsertTwoElemToSize1Queue(){
         int size = 1;

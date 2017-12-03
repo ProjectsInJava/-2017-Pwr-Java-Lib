@@ -5,8 +5,9 @@ import java.util.List;
 
 public class QueueCycle<E> implements MyQueue<E>{
     private List<E> memory_;
-    private int f = 0;
+    private int readIdx = 0;
     private int writeIdx = 0;
+    private int elemCounter = 0;
 
     public QueueCycle(int size) {
         memory_ = new ArrayList<>(size);
@@ -23,22 +24,31 @@ public class QueueCycle<E> implements MyQueue<E>{
         else{
             memory_.set(writeIdx, newElem);
             writeIdx = (writeIdx+1)%memory_.size();
+            elemCounter++;
         }
     }
 
     @Override
     public void dequeue() {
-
+        if (!isEmpty()) {
+            readIdx=(readIdx+1)%memory_.size();
+            elemCounter--;
+        }
     }
 
     @Override
     public E first() throws EmptyException {
-        return null;
+        if (isEmpty()){
+            throw new EmptyException("QueueCycle is empty");
+        }
+        else{
+            return memory_.get(readIdx);
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        return f == writeIdx;
+        return readIdx == writeIdx && (elemCounter==0);
     }
 
     @Override
