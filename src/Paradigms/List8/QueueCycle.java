@@ -5,14 +5,14 @@ import java.util.List;
 
 public class QueueCycle<E> implements MyQueue<E>{
     private List<E> memory_;
-    private int readIdx;
-    private int writeIdx;
-    private int elemCounter;
+    private int readIdx_;
+    private int writeIdx_;
+    private int elemCounter_;
 
     public QueueCycle(int size) {
-        elemCounter = 0;
-        readIdx = 0;
-        writeIdx = 0;
+        elemCounter_ = 0;
+        readIdx_ = 0;
+        writeIdx_ = 0;
         memory_ = new ArrayList<>(size);
         for (int i = 0; i<size; i++){
             memory_.add(null);
@@ -25,17 +25,17 @@ public class QueueCycle<E> implements MyQueue<E>{
             throw new FullException("QueueCycle is full");
         }
         else{
-            memory_.set(writeIdx, newElem);
-            writeIdx = (writeIdx+1)%memory_.size();
-            elemCounter++;
+            memory_.set(writeIdx_, newElem);
+            writeIdx_ = (writeIdx_+1)%memory_.size();
+            elemCounter_++;
         }
     }
 
     @Override
     public void dequeue() {
         if (!isEmpty()) {
-            readIdx = (readIdx + 1) % memory_.size();
-            elemCounter--;
+            readIdx_ = (readIdx_ + 1) % memory_.size();
+            elemCounter_--;
         }
         else{
             System.out.println("log: QueueCycle is empty");
@@ -48,17 +48,17 @@ public class QueueCycle<E> implements MyQueue<E>{
             throw new EmptyException("QueueCycle is empty");
         }
         else{
-            return memory_.get(readIdx);
+            return memory_.get(readIdx_);
         }
     }
 
     @Override
     public boolean isEmpty() {
-        return elemCounter<=0;
+        return elemCounter_<=0;
     }
 
     @Override
     public boolean isFull() {
-        return elemCounter >= memory_.size();
+        return elemCounter_ >= memory_.size();
     }
 }
