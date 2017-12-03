@@ -2,10 +2,7 @@ package Paradigms.List8;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -171,33 +168,65 @@ class QueueCycleTest {
         }
     }
 
-    /*
     @Test
-    public void shouldInsertThreeElemToSize4Queue(){
+    public void shouldInsertThreeElemToSize4Queue() throws FullException, EmptyException {
         int size = 4;
-        boolean isExceptionHandled = false;
         MyQueue<String> queue = new QueueCycle<>(size);
-        ArrayList<String> expectedQueue = new ArrayList<>(size);
-        expectedQueue.add("1");
-        expectedQueue.add("2");
-        expectedQueue.add("3");
-        expectedQueue.add(null);
+        String fstVal = "1";
+        String sndVal = "2";
+        String thirdVal = "3";
 
-        try {
-            queue.enqueue("1");
-            queue.enqueue("2");
-            queue.enqueue("3");
-        }catch(FullException e){
+        queue.enqueue(fstVal);
+        queue.enqueue(sndVal);
+        queue.enqueue(thirdVal);
+
+        assertFalse(queue.isEmpty());
+        assertFalse(queue.isFull());
+        assertEquals(fstVal, queue.first());
+    }
+
+    @Test
+    public void shouldBehaveProperWhenManyEnqueuesAndDequeues() throws FullException, EmptyException {
+        int size = 4;
+        MyQueue<String> queue = new QueueCycle<>(size);
+        String fstVal = "1";
+        String sndVal = "2";
+        String thirdVal = "3";
+        String fourthVal = "4";
+        String fifthVal = "5";
+
+        queue.enqueue(fstVal);
+        queue.enqueue(sndVal);
+        assertEquals(fstVal, queue.first());
+
+        queue.enqueue(thirdVal);
+        queue.dequeue();
+        assertEquals(sndVal, queue.first());
+
+        queue.enqueue(fourthVal);
+        queue.dequeue();
+        assertEquals(thirdVal, queue.first());
+
+        queue.enqueue(fifthVal);
+        queue.dequeue();
+        assertEquals(fourthVal, queue.first());
+
+        queue.dequeue();
+        assertEquals(fifthVal, queue.first());
+
+        queue.dequeue();
+        try{
+            queue.first();
+        }catch(EmptyException e){
             System.out.println(e.getMessage());
-            assertTrue(false);
-            isExceptionHandled = true;
-        }
-
-        if(!isExceptionHandled){
+            assertTrue(queue.isEmpty());
             assertFalse(queue.isFull());
-            ArrayList<String> toArrayList = queue.toArrayList();
-            assertEquals(expectedQueue, queue.toArrayList());
+
+            queue.enqueue(fstVal);
+            queue.enqueue(sndVal);
+            assertFalse(queue.isEmpty());
+            assertFalse(queue.isFull());
+            assertEquals(fstVal, queue.first());
         }
     }
-    */
 }
