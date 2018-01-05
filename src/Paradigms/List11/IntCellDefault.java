@@ -1,9 +1,5 @@
 package Paradigms.List11;
 
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 public class IntCellDefault {
     public int getN(){
         return n;
@@ -22,35 +18,30 @@ class Count extends Thread{
     @Override
     public void run(){
         for (int i = 0; i < 200000; i++){
-//            tryAcquire();
             int temp = n.getN();
             n.setN(temp+1);
-//            semaphore.release();
         }
     }
-
-/*
-    private void tryAcquire(){
-        try{
-            semaphore.acquire();
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-*/
 
     public static void main(String[] args){
-        Count counterFst = new Count();
-        Count counterSnd = new Count();
-        counterFst.start();
-        counterSnd.start();
+        Count thread1 = new Count();
+        Count thread2 = new Count();
+        thread1.start();
+        thread2.start();
         try{
-            counterFst.join();
-            counterSnd.join();
+            thread1.join();
+            thread2.join();
         }catch(InterruptedException e){
             System.out.println(e.getStackTrace());
             System.out.println("Catched exception");
         }
         System.out.println("The value of n is " + n.getN());
     }
+
+    // First of all thread1 and thread2 starts in various times
+    // Secondly each thread makes a copy to their local caches
+    // It implies that when thread1 modifies the static variable
+    // The thread2 can contain old value of static variable
+    // And will increase basing on old value
+    // Then finally cause that the value of n.n has lower value then expected 400000
 }
