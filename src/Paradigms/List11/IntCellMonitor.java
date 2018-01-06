@@ -1,15 +1,26 @@
 package Paradigms.List11;
 
 public class IntCellMonitor {
+    // function sets isSet on false and on the beggining checks
+    // if isSet is false then stops the execution of the thread until another thread invokes the notify
+    // then condition is checked one more time
+    // it prevents from read the same value by two threads until first thread will call set function
+    // the same history with set
     public synchronized int getN(){
         while(!isSet){
             waitForNotifying();
         }
         isSet=false;
         notifyAll();
+        // Wakes up all threads that are waiting on this object's monitor
         return n;
     }
 
+    // function sets isSet on true and on the beggining checks
+    // if isSet is true then stops the execution of the thread until another thread invokes the notify
+    // then condition is checked one more time
+    // it prevents from set the same value by two threads until first thread will call get function
+    // the same history with set
     public synchronized void setN(int n){
         while(isSet){
             waitForNotifying();
@@ -19,9 +30,13 @@ public class IntCellMonitor {
         notifyAll();
     }
 
+    // above approach protects from the replicated call of getN or setN between threads
+    // it forces to call getN before setN everytime
     private void waitForNotifying(){
         try{
             wait();
+            // causes the current thread to wait until
+            // another thread invokes the notify/notifyAll() method for this obj
         }catch(InterruptedException e){
             e.printStackTrace();
         }
