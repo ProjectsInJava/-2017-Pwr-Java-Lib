@@ -1,4 +1,4 @@
-package Paradigms.List11;
+package Paradigms.List11.CommonStaticVariableResolvings;
 
 public class IntCellMonitor {
     // function sets isSet on false and on the beggining checks
