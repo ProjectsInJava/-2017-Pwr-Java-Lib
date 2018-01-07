@@ -1,5 +1,5 @@
 package Paradigms.List11.BoundedBuffer;
 
 public interface Produce {
-    public void put(int val);
+    void put(int val);
 }

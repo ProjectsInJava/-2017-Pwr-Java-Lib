@@ -18,6 +18,5 @@ public class ProdCons {
             cons[i] = new Consumer("Consumer " + (i+1), buf);
             cons[i].start();
         }
-
     }
 }

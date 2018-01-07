@@ -44,4 +44,11 @@ class Count extends Thread{
     // The thread2 can contain old value of static variable
     // And will increase basing on old value
     // Then finally cause that the value of n.n has lower value then expected 400000
+    //
+    // Exception
+    // InterruptedException is cought for the security because JVM can sometimes throw it
+    // But common situation is when someone will call interrupt(przerwij) on this thread
+    //
+    // Join
+    // Wait for this thread to die
 }
