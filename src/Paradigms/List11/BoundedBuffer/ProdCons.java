@@ -19,4 +19,13 @@ public class ProdCons {
             cons[i].start();
         }
     }
+
+    // Deadlocks is about Google Nexus release
+    // A lot of consumers
+    // Google starts to produce them with delay
+    // ASAP filled up the magazines and producers went on holiday
+    // Consumers are still waiting on product but there is noone to notif them about it
+
+    // Notifs always received by consumers
+
 }

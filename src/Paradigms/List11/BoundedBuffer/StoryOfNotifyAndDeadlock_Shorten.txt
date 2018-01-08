@@ -1,0 +1,26 @@
+Consumer 1 waiting on take
+Consumer 3 waiting on take
+Consumer 2 waiting on take
+Producer 3 produced: 1                     [1,/,/,/,/]
+Put notify
+Producer 2 produced: 1                     [1,1,/,/,/]
+Consumer 1 consuming: 1                    [/,1,/,/,/]
+Producer 2 produced: 2                     [/,1,2,/,/]
+Producer 2 produced: 3                     [/,1,2,3,/]
+Producer 2 produced: 4                     [/,1,2,3,4]
+Producer 3 produced: 2                     [2,1,2,3,4]
+Producer 1 waiting with put the 1
+Consumer 1 consuming: 1                    [2,/,2,3,4]
+Take notify
+Producer 3 produced: 3                     [2,3,2,3,4]
+Producer 2 waiting with put the 5
+Producer 3 waiting with put the 4
+Consumer 1 consuming: 2                    [2,3,/,3,4]
+Take notify
+Consumer 3 consuming: 3                    [2,3,/,/,4]
+Consumer 1 consuming: 4                    [2,3,/,/,/]
+Consumer 2 consuming: 2                    [/,3,/,/,/]
+Consumer 1 consuming: 3                    [/,/,/,/,/]
+Consumer 3 waiting on take
+Consumer 1 waiting on take
+Consumer 2 waiting on take
