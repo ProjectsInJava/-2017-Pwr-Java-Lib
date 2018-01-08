@@ -20,6 +20,7 @@ public class ProdCons {
         }
     }
 
+    // Used notify rather than notifyAll
     // Deadlocks is about Google Nexus release
     // A lot of consumers
     // Google starts to produce them with delay
