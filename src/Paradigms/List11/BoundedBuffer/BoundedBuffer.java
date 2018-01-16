@@ -21,7 +21,7 @@ public class BoundedBuffer implements Consume, Produce {
         System.out.println(Thread.currentThread().getName() + " produced: " + inVal);
         if (elemsCounter_ == 1){
             System.out.println("Put notify");
-            notify();
+            notifyAll();
         }
     }
 
@@ -39,7 +39,7 @@ public class BoundedBuffer implements Consume, Produce {
         System.out.println(Thread.currentThread().getName()+ " consuming: " + x);
         if (elemsCounter_ == SIZE_-1){
             System.out.println("Take notify");
-            notify();
+            notifyAll();
         }
         // It occurs when buffor was full and threads was stopped at the begginning of put
         // Then consumer took one elem from the buffer, so empty slot appeared

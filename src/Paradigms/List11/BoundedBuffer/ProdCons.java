@@ -1,7 +1,7 @@
 package Paradigms.List11.BoundedBuffer;
 
 public class ProdCons {
-    public static void main(String args[]){
+    public static void main(String args[]) throws InterruptedException {
         final int bufferCapacity = 5;
         final int numberOfConsumedElems = 3;
         final int numberOfProducedElems = 3;
@@ -18,6 +18,8 @@ public class ProdCons {
             cons[i] = new Consumer("Consumer " + (i+1), buf);
             cons[i].start();
         }
+
+        System.out.println("Program has finished");
     }
 
     // Used notify rather than notifyAll
